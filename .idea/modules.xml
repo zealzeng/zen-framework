@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/zen-common/zen-common.iml" filepath="$PROJECT_DIR$/zen-common/zen-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zen-framework.iml" filepath="$PROJECT_DIR$/zen-framework.iml" />
+    </modules>
+  </component>
+</project>
