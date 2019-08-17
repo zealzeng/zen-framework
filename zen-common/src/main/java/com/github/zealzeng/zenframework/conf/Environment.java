@@ -4,7 +4,6 @@
 package com.github.zealzeng.zenframework.conf;
 
 import com.github.zealzeng.zenframework.util.*;
-import com.github.zenframework.util.*;
 
 import java.io.File;
 import java.io.FileInputStream;
