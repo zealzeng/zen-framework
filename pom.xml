@@ -46,68 +46,69 @@
 
     <modules>
         <module>zen-common</module>
+        <module>zen-web</module>
     </modules>
 
-    <!--    <build>-->
-    <!--        <resources>-->
-    <!--            <resource>-->
-    <!--                <directory>${basedir}/src/main/java</directory>-->
-    <!--                <includes>-->
-    <!--                    <include>**/*.xml</include>-->
-    <!--                    <include>**/*.properties</include>-->
-    <!--                </includes>-->
-    <!--            </resource>-->
-    <!--            <resource>-->
-    <!--                <directory>${basedir}/src/main/resources</directory>-->
-    <!--                <includes>-->
-    <!--                    <include>**/*.xml</include>-->
-    <!--                    <include>**/*.properties</include>-->
-    <!--                </includes>-->
-    <!--            </resource>-->
-    <!--        </resources>-->
+        <build>
+            <resources>
+                <resource>
+                    <directory>${basedir}/src/main/java</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                    </includes>
+                </resource>
+                <resource>
+                    <directory>${basedir}/src/main/resources</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                    </includes>
+                </resource>
+            </resources>
 
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-    <!--                <version>3.5.1</version>-->
-    <!--                <configuration>-->
-    <!--                    <source>1.8</source>-->
-    <!--                    <target>1.8</target>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                <artifactId>maven-source-plugin</artifactId>-->
-    <!--                <version>2.2.1</version>-->
-    <!--                <configuration>-->
-    <!--                    <attach>true</attach>-->
-    <!--                </configuration>-->
-    <!--                <executions>-->
-    <!--                    <execution>-->
-    <!--                        <phase>compile</phase>-->
-    <!--                        <goals>-->
-    <!--                            <goal>jar</goal>-->
-    <!--                        </goals>-->
-    <!--                    </execution>-->
-    <!--                </executions>-->
-    <!--            </plugin>-->
-    <!--             <plugin>-->
-    <!--            <groupId>org.apache.maven.plugins</groupId>-->
-    <!--            <artifactId>maven-gpg-plugin</artifactId>-->
-    <!--            <version>1.6</version>-->
-    <!--            <executions>-->
-    <!--                <execution>-->
-    <!--                    <id>sign-artifacts</id>-->
-    <!--                    <phase>verify</phase>-->
-    <!--                    <goals>-->
-    <!--                        <goal>sign</goal>-->
-    <!--                    </goals>-->
-    <!--                </execution>-->
-    <!--            </executions>-->
-    <!--        </plugin>-->
-    <!--        </plugins>-->
-    <!--    </build>-->
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            </plugins>
+        </build>
 
     <!--    <dependencies>-->
     <!--        <dependency>-->
