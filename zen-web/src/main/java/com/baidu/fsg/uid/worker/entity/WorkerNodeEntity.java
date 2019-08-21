@@ -17,10 +17,9 @@ package com.baidu.fsg.uid.worker.entity;
 
 import java.util.Date;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 import com.baidu.fsg.uid.worker.WorkerNodeType;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Entity for M_WORKER_NODE
