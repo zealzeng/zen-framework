@@ -25,7 +25,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.zenframework.util.bcrypt.BCryptPasswordEncoder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import org.zenframework.vo.Pair;
+import org.zenframework.common.Pair;
 
 /**
  * @author Zeal 2016年2月26日

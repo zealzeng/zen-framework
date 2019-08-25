@@ -1,7 +1,7 @@
 package org.zenframework.shiro.realm;
 
 import org.zenframework.util.StringUtils;
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.shiro.error.AuthenticationError;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.zenframework.shiro.vo.RememberMeToken;

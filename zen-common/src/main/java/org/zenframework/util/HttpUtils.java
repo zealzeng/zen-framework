@@ -27,7 +27,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 
 /**
  * @author zeal 2013-9-25

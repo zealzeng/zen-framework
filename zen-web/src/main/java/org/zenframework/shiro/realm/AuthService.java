@@ -1,6 +1,6 @@
 package org.zenframework.shiro.realm;
 
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 

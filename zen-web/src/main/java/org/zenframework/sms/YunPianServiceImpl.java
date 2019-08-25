@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.zenframework.util.HttpUtils;
 import org.zenframework.util.JSONUtils;
 import org.zenframework.util.StringUtils;
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.web.vo.ErrorCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

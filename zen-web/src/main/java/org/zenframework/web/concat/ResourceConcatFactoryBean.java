@@ -1,6 +1,5 @@
 package org.zenframework.web.concat;
 
-import com.whlylc.web.concat.ResourceConcat;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
@@ -12,8 +11,8 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 /**
+ * Resource concat spring factory bean
  * Created by Zeal on 2019/4/10 0010.
- * @deprecated Please use ResourceConcatFactoryBean from com.whlylc
  */
 public class ResourceConcatFactoryBean implements FactoryBean<ResourceConcat>,ApplicationContextAware,InitializingBean,DisposableBean {
 

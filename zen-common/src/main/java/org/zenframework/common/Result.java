@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012,  All rights reserved.
  */
-package org.zenframework.vo;
+package org.zenframework.common;
 
 import java.io.Serializable;
 import java.util.HashMap;

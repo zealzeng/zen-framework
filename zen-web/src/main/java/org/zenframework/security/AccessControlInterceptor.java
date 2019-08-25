@@ -1,6 +1,6 @@
 package org.zenframework.security;
 
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.security.annotation.*;
 import org.zenframework.security.util.AuthUtils;
 import org.zenframework.web.vo.ErrorCode;

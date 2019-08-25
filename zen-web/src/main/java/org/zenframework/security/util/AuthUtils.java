@@ -1,6 +1,6 @@
 package org.zenframework.security.util;
 
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.security.*;
 import org.zenframework.security.annotation.AuthenticationRequest;
 import org.zenframework.security.annotation.Logical;

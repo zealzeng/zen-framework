@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import org.zenframework.util.NumberUtils;
 import org.zenframework.util.StringUtils;
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.web.util.WebUtils;
 import org.zenframework.web.vo.ErrorCode;
 import org.zenframework.web.vo.Pagination;
@@ -101,9 +101,6 @@ public abstract class BaseCtrl {
 	 * @return
 	 */
 	protected Pagination<?> getPagination(HttpServletRequest request, boolean generateDefault) {
-//		if (!this.isPaginationRequest(request)) {
-//			return generateDefault ? new Pagination<Object>() : null;
-//		}
 		if (!this.isPaginationRequest(request) && !generateDefault) {
 			return null;
 		}

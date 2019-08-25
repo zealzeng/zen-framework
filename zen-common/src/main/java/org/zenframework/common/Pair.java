@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016, All rights reserved.
  */
-package org.zenframework.vo;
+package org.zenframework.common;
 
 import java.io.Serializable;
 

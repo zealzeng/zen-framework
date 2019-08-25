@@ -23,7 +23,7 @@ import org.zenframework.util.JSONUtils;
 import org.zenframework.util.NumberUtils;
 import org.zenframework.util.StringEscapeUtils;
 import org.zenframework.util.StringUtils;
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.web.vo.HttpFile;
 
 /**

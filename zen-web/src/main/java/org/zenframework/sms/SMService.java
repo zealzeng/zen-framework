@@ -3,7 +3,7 @@
  */
 package org.zenframework.sms;
 
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 
 /**
  * Short message service

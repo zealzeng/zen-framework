@@ -3,7 +3,7 @@ package org.zenframework.security.web;
 import org.zenframework.captcha.CaptchaGenerator;
 import org.zenframework.captcha.DefaultCaptchaGenerator;
 import org.zenframework.util.StringUtils;
-import org.zenframework.vo.Result;
+import org.zenframework.common.Result;
 import org.zenframework.security.*;
 import org.zenframework.security.annotation.AuthenticationRequest;
 import org.zenframework.web.util.SessionUtils;
