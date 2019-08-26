@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,7 +39,7 @@ public abstract class BaseCtrl {
 	 */
 	protected String getMessage(String key) {
 		try {
-		    return this.messageSource.getMessage(key, null, null);
+		    return this.messageSource.getMessage(key, null, LocaleContextHolder.getLocale());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -54,9 +55,10 @@ public abstract class BaseCtrl {
 	protected String getErrorMessage(int errorCode) {
 		String key = WebError.KEY_PREFIX + errorCode;
 		try {
-		    return this.messageSource.getMessage(key, null, null);
+		    return this.messageSource.getMessage(key, null, LocaleContextHolder.getLocale());
 		}
 		catch (Exception e) {
+		    e.printStackTrace();
 			return getDefaultErrorMessage(errorCode);
 		}
 	}
@@ -104,7 +106,7 @@ public abstract class BaseCtrl {
 		if (!this.isPaginationRequest(request) && !generateDefault) {
 			return null;
 		}
-		Pagination<?> page = new Pagination<Object>();
+		Pagination<?> page = new Pagination<>();
 		String pageNoStr = request.getParameter(Pagination.PAGE_NO);
 		int pageNo = 1;
 		if(StringUtils.isNotBlank(pageNoStr)){
