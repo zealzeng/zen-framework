@@ -3,7 +3,7 @@ package org.zenframework.security;
 import org.zenframework.common.Result;
 import org.zenframework.security.annotation.*;
 import org.zenframework.security.util.AuthUtils;
-import org.zenframework.web.vo.ErrorCode;
+import org.zenframework.web.error.WebError;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 import org.springframework.web.HttpRequestHandler;
@@ -240,7 +240,7 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
                 return authResult;
             }
             authResult = accessControl.getAuthService().authenticate(authToken);
-            if (authResult.getResultCode() != ErrorCode.NO_ERROR) {
+            if (authResult.getResultCode() != WebError.NO_ERROR) {
                 accessControl.onAuthenticateFailure(request, response, authenticationRequest, authToken, authResult.getResultCode());
 
             } else {

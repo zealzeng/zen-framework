@@ -8,7 +8,7 @@ import org.zenframework.util.HttpUtils;
 import org.zenframework.util.JSONUtils;
 import org.zenframework.util.StringUtils;
 import org.zenframework.common.Result;
-import org.zenframework.web.vo.ErrorCode;
+import org.zenframework.web.error.WebError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,22 +63,22 @@ public class YunPianServiceImpl implements SMService {
             
             if (httpResult.getResultCode() == 200) {
                 if (code != null && code.intValue() == 0) {
-                	return new Result<>(ErrorCode.NO_ERROR, msg, null);
+                	return new Result<>(WebError.NO_ERROR, msg, null);
                 }
                 else {
-                	return new Result<>(ErrorCode.UNKNOWN_ERROR, StringUtils.isEmpty(msg) ? ("Failed to send message to " + mobile) : msg, null);
+                	return new Result<>(WebError.UNKNOWN_ERROR, StringUtils.isEmpty(msg) ? ("Failed to send message to " + mobile) : msg, null);
                 }
             }
             else {
             	String error  = StringUtils.isEmpty(msg) ? ("Failed to send message to " + mobile) : msg;
                 logger.error(error);
-                return new Result<String>(ErrorCode.UNKNOWN_ERROR, error, null);
+                return new Result<String>(WebError.UNKNOWN_ERROR, error, null);
             }
         }
         catch (Exception e) {
         	String error = "Failed to send message to " + mobile + "." + e.toString();
             logger.error(error, e);
-            return new Result<String>(ErrorCode.UNKNOWN_ERROR, error, null);
+            return new Result<String>(WebError.UNKNOWN_ERROR, error, null);
         }
 
 	}

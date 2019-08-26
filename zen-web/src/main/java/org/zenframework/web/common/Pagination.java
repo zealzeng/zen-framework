@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012,  All rights reserved.
  */
-package org.zenframework.web.vo;
+package org.zenframework.web.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;

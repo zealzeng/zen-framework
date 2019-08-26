@@ -8,7 +8,7 @@ import org.zenframework.shiro.error.AuthenticationError;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.zenframework.shiro.vo.RememberMeToken;
 import org.zenframework.shiro.vo.WebAuthToken;
-import org.zenframework.web.vo.ErrorCode;
+import org.zenframework.web.error.WebError;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -116,7 +116,7 @@ public abstract class WebAuthService<B extends AuthInfo> implements AuthService<
             return AuthenticationError.CREDENTIAL_EXPIRED;
         }
         else {
-            return ErrorCode.NO_ERROR;
+            return WebError.NO_ERROR;
         }
     }
 
@@ -132,7 +132,7 @@ public abstract class WebAuthService<B extends AuthInfo> implements AuthService<
                 return AuthenticationError.INVALID_REQUEST_CAPTCHA;
             }
         }
-        return ErrorCode.NO_ERROR;
+        return WebError.NO_ERROR;
     }
 
     /**
@@ -149,12 +149,12 @@ public abstract class WebAuthService<B extends AuthInfo> implements AuthService<
             return new Result<>(AuthenticationError.ACCOUNT_NOT_EXIST);
         }
         int errorCode = this.validateAuthInfo(authInfo);
-        if (errorCode != ErrorCode.NO_ERROR) {
+        if (errorCode != WebError.NO_ERROR) {
             this.authenticateFail(errorCode, token, authInfo);
             return new Result<>(errorCode);
         }
         errorCode = this.validateCaptcha(token, authInfo);
-        if (errorCode != ErrorCode.NO_ERROR) {
+        if (errorCode != WebError.NO_ERROR) {
             this.authenticateFail(errorCode, token, authInfo);
             return new Result<>(errorCode);
         }
@@ -196,7 +196,7 @@ public abstract class WebAuthService<B extends AuthInfo> implements AuthService<
         }
         //Success callback
         authInfo = this.authenticateSuccess(token, authInfo);
-        return new Result<>(ErrorCode.NO_ERROR, authInfo);
+        return new Result<>(WebError.NO_ERROR, authInfo);
     }
 
     /**
@@ -260,7 +260,7 @@ public abstract class WebAuthService<B extends AuthInfo> implements AuthService<
         B authInfo = this.queryRememberMeAuthInfo(rememberMeToken);
         if (authInfo !=  null) {
             authInfo.setRememberMeToken(rememberMeToken);
-            return new Result<>(ErrorCode.NO_ERROR, authInfo);
+            return new Result<>(WebError.NO_ERROR, authInfo);
         }
         else {
             return new Result<>(AuthenticationError.AUTHC_CONFIG_ERROR);

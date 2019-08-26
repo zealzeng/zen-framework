@@ -6,7 +6,7 @@ import org.zenframework.shiro.error.AuthenticationError;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.zenframework.shiro.vo.RememberMeToken;
 import org.zenframework.shiro.vo.WebAuthToken;
-import org.zenframework.web.vo.ErrorCode;
+import org.zenframework.web.error.WebError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
@@ -91,7 +91,7 @@ public class WebAuthorizingRealm<T extends AuthInfo> extends AuthorizingRealm {
         T authInfo = null;
         try {
             Result<T> result = this.authService.authenticate(requestToken);
-            if (result.getResultCode() != ErrorCode.NO_ERROR) {
+            if (result.getResultCode() != WebError.NO_ERROR) {
                 throw new AuthenticationError(result.getResultCode());
             }
             authInfo = result.getResultEntity();

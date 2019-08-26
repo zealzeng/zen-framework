@@ -35,7 +35,7 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 import org.zenframework.persist.util.SQLUtils;
-import org.zenframework.web.vo.Pagination;
+import org.zenframework.web.common.Pagination;
 
 /**
  * 通过拦截<code>StatementHandler</code>的<code>prepare</code>方法，重写sql语句实现物理分页。

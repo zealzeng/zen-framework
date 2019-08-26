@@ -165,13 +165,7 @@ public class DefaultAppConfigInitializer extends AppConfigInitializer {
         }
         else {
             System.setProperty(APP_DECRYPT_KEY, null);
-            try {
-                return bek.getBytes("UTF-8");
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+            return bek.getBytes(StandardCharsets.UTF_8);
         }
     }
 

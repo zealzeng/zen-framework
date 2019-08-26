@@ -18,8 +18,8 @@ import org.zenframework.util.NumberUtils;
 import org.zenframework.util.StringUtils;
 import org.zenframework.common.Result;
 import org.zenframework.web.util.WebUtils;
-import org.zenframework.web.vo.ErrorCode;
-import org.zenframework.web.vo.Pagination;
+import org.zenframework.web.error.WebError;
+import org.zenframework.web.common.Pagination;
 
 /**
  * Extract some common functions of message resource,pagination,json
@@ -52,7 +52,7 @@ public abstract class BaseCtrl {
 	 * @return
 	 */
 	protected String getErrorMessage(int errorCode) {
-		String key = ErrorCode.KEY_PREFIX + errorCode;
+		String key = WebError.KEY_PREFIX + errorCode;
 		try {
 		    return this.messageSource.getMessage(key, null, null);
 		}
@@ -68,18 +68,18 @@ public abstract class BaseCtrl {
 	 */
 	private String getDefaultErrorMessage(int errorCode) {
 		//Avoid web application missing these public error code defined in ErrorCode
-		if (errorCode == ErrorCode.NO_ERROR) {
-			return "Operation is succesful";
+		if (errorCode == WebError.NO_ERROR) {
+			return "Operation is successful";
 		}
-		else if (errorCode == ErrorCode.UNKNOWN_ERROR) {
+		else if (errorCode == WebError.UNKNOWN_ERROR) {
 			return "Unknown error";
 		}
-		else if (errorCode == ErrorCode.INVALID_SESSION) {
-			return "User session is expired or invalid";
-		}
-		else if (errorCode == ErrorCode.INVALID_SESSION_TOKEN) {
-			return "Request token is invalid";
-		}
+//		else if (errorCode == WebError.INVALID_SESSION) {
+//			return "User session is expired or invalid";
+//		}
+//		else if (errorCode == WebError.INVALID_SESSION_TOKEN) {
+//			return "Request token is invalid";
+//		}
 		else {
 			return "error code is " + errorCode;
 		}
@@ -208,26 +208,26 @@ public abstract class BaseCtrl {
 		List<ObjectError> errors = result.getAllErrors();
 		//Assume operation is successful if no error
 		if (errors == null || errors.size() <= 0) {
-			return this.getResult(ErrorCode.NO_ERROR);
+			return this.getResult(WebError.NO_ERROR);
 		}
 		ObjectError error = errors.get(0);
 		String message = error.getDefaultMessage();
 		if (StringUtils.isEmpty(message)) {
-			return this.getResult(ErrorCode.UNKNOWN_ERROR);
+			return this.getResult(WebError.UNKNOWN_ERROR);
 		}
-		if (message.startsWith(ErrorCode.KEY_PREFIX)) {
-			String errorCodeStr = message.substring(ErrorCode.KEY_PREFIX.length());
+		if (message.startsWith(WebError.KEY_PREFIX)) {
+			String errorCodeStr = message.substring(WebError.KEY_PREFIX.length());
 			int errorCode = 0;
 			try {
 			    errorCode = Integer.parseInt(errorCodeStr);
 			    return this.getResult(errorCode, this.getMessage(message));
 			}
 			catch (Exception e) {
-				return this.getResult(ErrorCode.UNKNOWN_ERROR, this.getMessage(message));
+				return this.getResult(WebError.UNKNOWN_ERROR, this.getMessage(message));
 			}
 		}
 		else {
-			return this.getResult(ErrorCode.UNKNOWN_ERROR, this.getMessage(message));
+			return this.getResult(WebError.UNKNOWN_ERROR, this.getMessage(message));
 		}
 	}
 	

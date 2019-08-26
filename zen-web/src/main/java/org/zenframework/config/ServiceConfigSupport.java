@@ -6,7 +6,9 @@ package org.zenframework.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.util.JdbcConstants;
 import org.zenframework.persist.mybatis.PaginationInterceptor;
-import org.zenframework.web.vo.Pagination;
+import org.zenframework.util.NumberUtils;
+import org.zenframework.util.StringUtils;
+import org.zenframework.web.common.Pagination;
 import org.apache.ibatis.session.*;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -22,7 +24,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -43,15 +44,24 @@ public abstract class ServiceConfigSupport {
      * @return
      */
     @Bean(name = ServiceConfigConsts.DATA_SOURCE_NAME)
-    public DataSource dataSource() {
+    public DruidDataSource dataSource() {
         DruidDataSource ds = new DruidDataSource();
         org.springframework.core.env.Environment env = this.environment;
-        ds.setUrl(env.getProperty(ServiceConfigConsts.PROPERTY_JBBC_URL));
-        ds.setUsername(env.getProperty(ServiceConfigConsts.PROPERTY_JDBC_USERNAME));
-        ds.setPassword(env.getProperty(ServiceConfigConsts.PROPERTY_JDBC_PASSWORD));
-        ds.setMaxActive(200);
-        ds.setMinIdle(2);
-        ds.setMaxWait(120000L);
+        ds.setUrl(env.getProperty(ServiceConfigConsts.DATASOURCE_URL));
+        ds.setUsername(env.getProperty(ServiceConfigConsts.DATASOURCE_USERNAME));
+        ds.setPassword(env.getProperty(ServiceConfigConsts.DATASOURCE_PASSWORD));
+        String maxActive = env.getProperty(ServiceConfigConsts.DATASOURCE_MAX_ACTIVE);
+        if (StringUtils.isNotEmpty(maxActive)) {
+            ds.setMaxActive(NumberUtils.toInt(maxActive));
+        }
+        ds.setMinIdle(1);
+        String maxWait = env.getProperty(ServiceConfigConsts.DATASOURCE_MAX_WAIT);
+        if (StringUtils.isEmpty(maxWait)) {
+            ds.setMaxWait(120000L);
+        }
+        else {
+            ds.setMaxWait(NumberUtils.toInt(maxWait));
+        }
         ds.setRemoveAbandoned(false);
 //		ds.setRemoveAbandonedTimeout(180);
         String dbType = ds.getDbType();
@@ -94,7 +104,7 @@ public abstract class ServiceConfigSupport {
      *
      * @return
      */
-    @Bean(name = ServiceConfigConsts.JDBC_TEAMPLATE_NAME)
+    @Bean(name = ServiceConfigConsts.JDBC_TEMPLATE_NAME)
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
@@ -115,7 +125,8 @@ public abstract class ServiceConfigSupport {
     @Bean(name = ServiceConfigConsts.SQL_SESSION_FACTORY_NAME)
     public SqlSessionFactoryBean sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource());
+        DruidDataSource dataSource = dataSource();
+        bean.setDataSource(dataSource);
         bean.setTypeAliases(new Class[]{Pagination.class});
         ClassPathResource mybatisConfigFile = new ClassPathResource("mybatis-config.xml");
         if (mybatisConfigFile.exists()) {
@@ -137,7 +148,7 @@ public abstract class ServiceConfigSupport {
             config.setJdbcTypeForNull(JdbcType.NULL);
             config.addInterceptor(new PaginationInterceptor());
             Properties variables = new Properties();
-            variables.put(PaginationInterceptor.VAR_DIALECT, "mysql");
+            variables.put(PaginationInterceptor.VAR_DIALECT, dataSource.getDbType());
             variables.put(PaginationInterceptor.VAR_PAGE_SQL_ID, ".*PageList$");
             config.setVariables(variables);
             bean.setConfiguration(config);
@@ -163,7 +174,7 @@ public abstract class ServiceConfigSupport {
      * @throws Exception
      */
     @Bean(name = ServiceConfigConsts.SQL_SESSION_NAME)
-    public SqlSession sqlSession(SqlSessionFactory factory) throws Exception {
+    public SqlSession sqlSession(SqlSessionFactory factory) {
         return new SqlSessionTemplate(factory);
     }
 

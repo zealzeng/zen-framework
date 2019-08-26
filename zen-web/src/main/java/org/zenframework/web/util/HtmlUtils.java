@@ -3,19 +3,22 @@
  */
 package org.zenframework.web.util;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
-import org.zenframework.util.StringUtils;
+//import org.jsoup.Jsoup;
+//import org.jsoup.safety.Whitelist;
+//import org.zenframework.util.StringUtils;
 //import org.owasp.validator.html.AntiSamy;
 //import org.owasp.validator.html.CleanResults;
 //import org.owasp.validator.html.Policy;
 
-import java.io.InputStream;
+//import java.io.InputStream;
 
 /**
+ * 默认使用jsoup处理
  * @author Zeal
  */
 public class HtmlUtils {
+
+	private static final HtmlHelper htmlHelper = new JsoupHtmlHelper();
 	
 //	private static AntiSamy antiSamy = null;
 //
@@ -50,20 +53,23 @@ public class HtmlUtils {
 //	}
 
 	public static String cleanHtml(String html) {
-		return Jsoup.clean(html, Whitelist.basic());
+		return htmlHelper.cleanHtml(html);
 	}
 
 	/**
-     * 不严谨的获取文本
      * @param html
      * @return
 	 * @deprecated
      */
     public static String getText(String html) {
+    	return htmlHelper.getText(html);
+    	//代码暂时别删除
+    	/**
         if (StringUtils.isEmpty(html)) {
             return html;
         }
         return html.replaceAll("</?[^>]+>", "");
+		 */
     }
 
 	

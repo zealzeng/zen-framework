@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013,  All rights reserved.
  */
-package org.zenframework.web.vo;
+package org.zenframework.web.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

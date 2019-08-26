@@ -3,13 +3,14 @@ package org.zenframework.shiro.filter;
 import com.alibaba.fastjson.JSONObject;
 import org.zenframework.captcha.CaptchaGenerator;
 import org.zenframework.captcha.DefaultCaptchaGenerator;
+import org.zenframework.security.AuthError;
 import org.zenframework.shiro.error.AuthenticationError;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.zenframework.shiro.vo.RememberMeToken;
 import org.zenframework.shiro.vo.WebAuthToken;
 import org.zenframework.web.util.SessionUtils;
 import org.zenframework.web.util.WebUtils;
-import org.zenframework.web.vo.ErrorCode;
+import org.zenframework.web.error.WebError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
@@ -150,7 +151,7 @@ public class WebAuthenticationFilter extends FormAuthenticationFilter {
         //FIXME Handle local and error attribute key
         if (this.messageSource != null) {
             try {
-                errorMessage = this.messageSource.getMessage(ErrorCode.KEY_PREFIX + errorCode, null, null);
+                errorMessage = this.messageSource.getMessage(WebError.KEY_PREFIX + errorCode, null, null);
             }
             catch (Exception ex) {
                 log.warn("Failed to get error code " + errorCode + " from message source");
@@ -272,7 +273,7 @@ public class WebAuthenticationFilter extends FormAuthenticationFilter {
                         "Authentication url [" + getLoginUrl() + "]");
         }
         if (WebUtils.isAjaxRequest(req)) {
-            resp.setStatus(ErrorCode.ACCESS_DENIED);
+            resp.setStatus(AuthError.ACCESS_DENIED);
         }
         else {
             saveRequestAndRedirectToLogin(request, response);

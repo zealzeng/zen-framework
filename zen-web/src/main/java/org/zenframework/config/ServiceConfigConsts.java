@@ -6,11 +6,16 @@ package org.zenframework.config;
 public class ServiceConfigConsts {
 
     //===================================================================
-    public static final String PROPERTY_JBBC_URL = "jdbc.url";
+    public static final String DATASOURCE_URL = "datasource.url";
 
-    public static final String PROPERTY_JDBC_USERNAME = "jdbc.username";
+    public static final String DATASOURCE_USERNAME = "datasource.username";
 
-    public static final String PROPERTY_JDBC_PASSWORD = "jdbc.password";
+    public static final String DATASOURCE_PASSWORD = "datasource.password";
+
+    public static final String DATASOURCE_MAX_ACTIVE = "datasource.max_active";
+
+    //ms
+    public static final String DATASOURCE_MAX_WAIT = "datasource.max_wait";
 
     //===================================================================
     public static final String CACHE_MANAGER_NAME = "zenCacheManager";
@@ -19,7 +24,7 @@ public class ServiceConfigConsts {
 
     public static final String TRANSACTION_MANAGER_NAME = "zenTransactionManager";
 
-    public static final String JDBC_TEAMPLATE_NAME = "zenJdbcTemplate";
+    public static final String JDBC_TEMPLATE_NAME = "zenJdbcTemplate";
 
     public static final String NAMED_PARAMETER_JDBC_TEMPLATE_NAME = "zenNamedParameterJdbcTemplate";
 

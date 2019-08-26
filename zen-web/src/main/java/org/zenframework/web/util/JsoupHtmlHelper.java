@@ -2,6 +2,7 @@ package org.zenframework.web.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import org.zenframework.util.StringUtils;
 
 /**
  * @author Zeal
@@ -22,7 +23,12 @@ public class JsoupHtmlHelper implements HtmlHelper {
 
     @Override
     public String cleanHtml(String html) {
-        return Jsoup.clean(html, whitelist);
+        if (StringUtils.isEmpty(html)) {
+            return html;
+        }
+        else {
+            return Jsoup.clean(html, whitelist);
+        }
     }
 
     @Override

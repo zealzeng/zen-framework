@@ -8,8 +8,7 @@ import java.beans.PropertyEditorSupport;
 import org.zenframework.util.StringEscapeUtils;
 
 /**
- * @author Zeal
- * @since 2016年5月31日
+ * @author Zeal 2016年5月31日
  */
 public class StringEscapeEditor extends PropertyEditorSupport {
 	

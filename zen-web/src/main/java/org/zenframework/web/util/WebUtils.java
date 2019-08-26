@@ -5,6 +5,8 @@ package org.zenframework.web.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,7 +26,7 @@ import org.zenframework.util.NumberUtils;
 import org.zenframework.util.StringEscapeUtils;
 import org.zenframework.util.StringUtils;
 import org.zenframework.common.Result;
-import org.zenframework.web.vo.HttpFile;
+import org.zenframework.web.common.HttpFile;
 
 /**
  * Web utility 
@@ -197,35 +199,33 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 		return getRequestParameter(request, name, escapeHtml, false);
 	}
 	
-	/**
-	 * Get request parameters and escape html
-	 * @param request
-	 * @param name
-	 * @param escapeHtml
-	 * @return
-	 * @deprecated
-	 */
-	public static String[] getRequestParameters(HttpServletRequest request, String name) {
-		return getRequestParameterValues(request, name, true, false);
-	}
-	
-	/**
-	 * Get request parameters and escape html
-	 * @param request
-	 * @param name
-	 * @param escapeHtml
-	 * @return
-	 * @deprecated
-	 */
-	public static String[] getRequestParameters(HttpServletRequest request, String name, boolean escapeHtml) {
-		return getRequestParameterValues(request, name, escapeHtml, false);
-	}
+//	/**
+//	 * Get request parameters and escape html
+//	 * @param request
+//	 * @param name
+//	 * @return
+//	 * @deprecated
+//	 */
+//	public static String[] getRequestParameters(HttpServletRequest request, String name) {
+//		return getRequestParameterValues(request, name, true, false);
+//	}
+//
+//	/**
+//	 * Get request parameters and escape html
+//	 * @param request
+//	 * @param name
+//	 * @param escapeHtml
+//	 * @return
+//	 * @deprecated
+//	 */
+//	public static String[] getRequestParameters(HttpServletRequest request, String name, boolean escapeHtml) {
+//		return getRequestParameterValues(request, name, escapeHtml, false);
+//	}
 	
 	/**
 	 * Get request parameter map and escape html
 	 * @param request
 	 * @param name
-	 * @param escapeHtml
 	 * @return
 	 */
 	public static Map<String,String[]> getRequestParameterMap(HttpServletRequest request, String name) {
@@ -332,10 +332,10 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 		return json;
 	}
 	
-	public static String jsonResult(Result<?> result) {
-		String json = JSONUtils.toJSONString(result);
-		return json;
-	}
+//	public static String jsonResult(Result<?> result) {
+//		String json = JSONUtils.toJSONString(result);
+//		return json;
+//	}
 	
 	/**
 	 * 
@@ -385,8 +385,12 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 		String contentType = request.getContentType();
 		return contentType != null && contentType.startsWith("application/x-www-form-urlencoded");
 	}
-	
+
 	public static String getRequestBody(HttpServletRequest request) throws IOException {
+		return getRequestBody(request, StandardCharsets.UTF_8);
+	}
+	
+	public static String getRequestBody(HttpServletRequest request, Charset charset) throws IOException {
 		
 	     if (isPostFormRequest(request)) {
 	    	 return "";
@@ -398,7 +402,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 			 byte[] bytes = new byte[size];
 			 //in.read(bytes);
 			 IOUtils.readFully(in, bytes);
-			 return new String(bytes, "UTF-8");
+			 return new String(bytes, charset);
 		 }
 		 
 		 size = in.available();
@@ -406,11 +410,11 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 			 byte[] bytes = new byte[size];
 			 //in.read(bytes);
 			 IOUtils.readFully(in, bytes);
-			 return new String(bytes, "UTF-8");
+			 return new String(bytes, charset);
 		 }
 		 byte[] bytes = IOUtils.toByteArray(in);
 		 if (bytes != null && bytes.length > 0) {
-			 return new String(bytes, "UTF-8"); 
+			 return new String(bytes, charset);
 		 }
 		 else {
 			 return "";
@@ -435,7 +439,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 				value = StringEscapeUtils.escapeHtml4(value);
 			}
 			if (htmlSafe) {
-				value = HtmlUtils.getSafeHtml(value);
+				value = HtmlUtils.cleanHtml(value);
 			}
 		}
 		return value;
@@ -462,7 +466,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 				    values[i] = StringEscapeUtils.escapeHtml4(values[i]);
 				}
 				if (htmlSafe) {
-					values[i] = HtmlUtils.getSafeHtml(values[i]);
+					values[i] = HtmlUtils.cleanHtml(values[i]);
 				}
 			}
 		}
