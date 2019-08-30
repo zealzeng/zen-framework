@@ -156,8 +156,8 @@ public class PaginationInterceptor implements Interceptor {
         String sql = boundSql.getSql();
         //String[] sqls = SQLUtils.parsePaginationSQLs(dialect, sql, page.getSortColumn(), page.isSortAsc());
         //String pageSql = buildPageSql(dialect, sqls[1], page);
-        int offset = (page.getPageNum() - 1) * page.getNumPerPage();
-        String[] sqls = SQLUtils.paginationSQLs(dialect, sql, offset, page.getNumPerPage());
+        int offset = (page.getPageNum() - 1) * page.getPageSize();
+        String[] sqls = SQLUtils.paginationSQLs(dialect, sql, offset, page.getPageSize());
         String countSQL = sqls[0];
         String limitSQL = sqls[1];
 
@@ -201,7 +201,7 @@ public class PaginationInterceptor implements Interceptor {
 	            if (rs.next()) {
 	                totalCount = rs.getInt(1);
 	            }
-	            page.setTotalCount(totalCount);
+	            page.setTotalRecord(totalCount);
 	        } 
 	        catch (SQLException e) {
 	            logger.error("Ignore this exception", e);
@@ -241,9 +241,9 @@ public class PaginationInterceptor implements Interceptor {
      */
     private String buildPageSqlForMysql(String sql, Pagination<?> page) {
         StringBuilder pageSql = new StringBuilder(sql.length() + 50);
-        String beginrow = String.valueOf((page.getPageNum() - 1) * page.getNumPerPage());
+        String beginrow = String.valueOf((page.getPageNum() - 1) * page.getPageSize());
         pageSql.append(sql);
-        pageSql.append(" limit " + beginrow + "," + page.getNumPerPage());
+        pageSql.append(" limit " + beginrow + "," + page.getPageSize());
         return pageSql.toString();
     }
 
@@ -256,8 +256,8 @@ public class PaginationInterceptor implements Interceptor {
      */
     private String buildPageSqlForOracle(String sql, Pagination<?> page) {
         StringBuilder pageSql = new StringBuilder(sql.length() + 100);
-        String beginrow = String.valueOf((page.getPageNum() - 1) * page.getNumPerPage());
-        String endrow = String.valueOf(page.getPageNum() * page.getNumPerPage());
+        String beginrow = String.valueOf((page.getPageNum() - 1) * page.getPageSize());
+        String endrow = String.valueOf(page.getPageNum() * page.getPageSize());
 
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");
         pageSql.append(sql);

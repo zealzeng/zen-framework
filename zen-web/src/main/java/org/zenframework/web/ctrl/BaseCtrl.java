@@ -24,8 +24,7 @@ import org.zenframework.web.common.Pagination;
 
 /**
  * Extract some common functions of message resource,pagination,json
- * @author Zeal
- * @since 2016年4月27日
+ * @author Zeal 2016年4月27日
  */
 public abstract class BaseCtrl {
 	
@@ -68,7 +67,7 @@ public abstract class BaseCtrl {
 	 * @param errorCode
 	 * @return
 	 */
-	private String getDefaultErrorMessage(int errorCode) {
+	protected String getDefaultErrorMessage(int errorCode) {
 		//Avoid web application missing these public error code defined in ErrorCode
 		if (errorCode == WebError.NO_ERROR) {
 			return "Operation is successful";
@@ -76,14 +75,8 @@ public abstract class BaseCtrl {
 		else if (errorCode == WebError.UNKNOWN_ERROR) {
 			return "Unknown error";
 		}
-//		else if (errorCode == WebError.INVALID_SESSION) {
-//			return "User session is expired or invalid";
-//		}
-//		else if (errorCode == WebError.INVALID_SESSION_TOKEN) {
-//			return "Request token is invalid";
-//		}
 		else {
-			return "error code is " + errorCode;
+			return "Error code is " + errorCode;
 		}
 	}
 	
@@ -116,14 +109,14 @@ public abstract class BaseCtrl {
 			}
 		}
 		String pageSizeStr = request.getParameter(Pagination.PAGE_SIZE);
-		int pageSize = Pagination.DEFALUT_PAGE_SIZE;
+		int pageSize = Pagination.DEFAULT_PAGE_SIZE;
 		if(StringUtils.isNotBlank(pageSizeStr)){
-			pageSize = NumberUtils.toInt(pageSizeStr, Pagination.DEFALUT_PAGE_SIZE);
+			pageSize = NumberUtils.toInt(pageSizeStr, Pagination.DEFAULT_PAGE_SIZE);
 			if (pageSize > Pagination.MAX_PAGE_SIZE) {
 				pageSize = Pagination.MAX_PAGE_SIZE;
 			}
 			if (pageSize <= 0) {
-				pageSize = Pagination.DEFALUT_PAGE_SIZE;
+				pageSize = Pagination.DEFAULT_PAGE_SIZE;
 			}
 		}
 		//Notice, never use it directly in your sql since it's not filtered
@@ -134,7 +127,7 @@ public abstract class BaseCtrl {
 			sortAsc = Boolean.valueOf(sortAscStr);
 		}
 		page.setPageNum(pageNo);
-		page.setNumPerPage(pageSize);
+		page.setPageSize(pageSize);
 		page.setSortKey(sortKey);
 		page.setSortAsc(sortAsc);		
 		page.setRequestParamMap(WebUtils.getRequestParameterSingleMap(request, true));
@@ -147,7 +140,7 @@ public abstract class BaseCtrl {
 	 * @param request
 	 * @return
 	 */
-	private boolean isPaginationRequest(HttpServletRequest request) {
+	protected boolean isPaginationRequest(HttpServletRequest request) {
 		String pageNoStr = request.getParameter(Pagination.PAGE_NO);
 		if (StringUtils.isBlank(pageNoStr)) {
 			return false;
@@ -199,7 +192,6 @@ public abstract class BaseCtrl {
 		result.setResultEntity(resultEntity);
 		return result;
 	}
-	
 	
 	/**
 	 * Extract standard result from bean validator binding result

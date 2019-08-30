@@ -11,7 +11,7 @@ import java.util.Map;
 import org.zenframework.util.URLUtils;
 
 /**
- * Value object used in pagination
+ *  Pagination value object
  * @author Zed
  */
 public class Pagination<T> implements Serializable {
@@ -49,13 +49,13 @@ public class Pagination<T> implements Serializable {
 	/**
 	 * Default record count per page
 	 */
-	public static final int DEFALUT_PAGE_SIZE = 10; 
+	public static final int DEFAULT_PAGE_SIZE = 10;
 
 	/** SUID */
 	private static final long serialVersionUID = 5738703782174909934L;
 	
 	/** Number of record  per page */
-	private int numPerPage = DEFALUT_PAGE_SIZE;
+	private int pageSize = DEFAULT_PAGE_SIZE;
 	
 	/** Current page number */
     private int pageNum = 1;
@@ -64,7 +64,7 @@ public class Pagination<T> implements Serializable {
     private int totalPage;
     
     /** Total record count */
-    private int totalCount;
+    private int totalRecord;
     
     /** Parameter that's used in sql query */
     private Object param = null;
@@ -108,7 +108,7 @@ public class Pagination<T> implements Serializable {
      */
     public Pagination(int currentPage, int numPerPage) {
         this.pageNum = currentPage;
-        this.numPerPage = numPerPage;
+        this.pageSize = numPerPage;
     }
     
     /**
@@ -125,28 +125,27 @@ public class Pagination<T> implements Serializable {
 		this.pageNum = pageNum;
 	}
 
-	public int getNumPerPage() {
-		return numPerPage;
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setNumPerPage(int numPerPage) {
-		this.numPerPage = numPerPage;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
     public int getTotalPage() {
         return totalPage;
     }
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getTotalRecord() {
+        return totalRecord;
     }
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
-        int p = this.totalCount / this.numPerPage;
-        int r = this.totalCount % this.numPerPage;
+    public void setTotalRecord(int totalRecord) {
+        this.totalRecord = totalRecord;
+        int p = this.totalRecord / this.pageSize;
+        int r = this.totalRecord % this.pageSize;
         this.totalPage = r > 0 ? p + 1 : p;
-        //this.pageNum = this.totalPage < this.pageNum ? 1 : this.pageNum;
     }
 
 	public Object getParam() {
@@ -158,11 +157,11 @@ public class Pagination<T> implements Serializable {
 	}
 	
 	public int getStartIndex() {
-		return (this.pageNum - 1) * this.numPerPage;
+		return (this.pageNum - 1) * this.pageSize;
 	}
 	
 	public int getEndIndex() {
-		return this.pageNum  * this.numPerPage - 1;
+		return this.pageNum  * this.pageSize - 1;
 	}
 	
 	public boolean isHavingNextPage() {
@@ -232,22 +231,6 @@ public class Pagination<T> implements Serializable {
 
 	/**
 	 * @return the requestParamMap
-	 * @deprecated Use getRequestParamMap
-	 */
-	public Map<String, String> getParamMap() {
-		return getRequestParamMap();
-	}
-
-	/**
-	 * @param paramMap the requestParamMap to set
-	 * @deprecated Use setRequestParamMap instead
-	 */
-	public void setParamMap(Map<String, String> paramMap) {
-		setRequestParamMap(paramMap);
-	}
-
-	/**
-	 * @return the requestParamMap
 	 */
 	public Map<String, String> getRequestParamMap() {
 		return requestParamMap;
@@ -267,7 +250,7 @@ public class Pagination<T> implements Serializable {
 		if (!this.isHavingNextPage()) {
 			return null;
 		}
-		Pagination<T> page = new Pagination<T>();
+		Pagination<T> page = new Pagination<>();
 		page.setPageNum(this.pageNum + 1);
 		page.setUri(this.uri);
 		page.setRequestParamMap(this.requestParamMap);
@@ -278,7 +261,7 @@ public class Pagination<T> implements Serializable {
 		if (!this.isHavingPreviousPage()) {
 			return null;
 		}
-		Pagination<T> page = new Pagination<T>();
+		Pagination<T> page = new Pagination<>();
 		page.setPageNum(this.pageNum - 1);
 		page.setUri(this.uri);
 		page.setRequestParamMap(this.requestParamMap);
@@ -290,7 +273,7 @@ public class Pagination<T> implements Serializable {
 	 * @return
 	 */
 	public List<Pagination<T>> getVisualPages() {
-		if (this.totalCount <= 0) {
+		if (this.totalRecord <= 0) {
 			return null;
 		}
 		List<Pagination<T>> pages = new ArrayList<>(11);
