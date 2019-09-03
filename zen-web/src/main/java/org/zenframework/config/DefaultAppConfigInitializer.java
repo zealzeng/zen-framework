@@ -18,6 +18,7 @@ import java.util.Properties;
  * 2.Find configuration file in  class path
  * 3.Load and decrypt config file
  * Created by Zeal on 2019/1/12 0012.
+ * @deprecated
  */
 public class DefaultAppConfigInitializer extends AppConfigInitializer {
 

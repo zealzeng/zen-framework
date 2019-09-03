@@ -263,7 +263,7 @@ public class SQLUtils {
      *
      * @param sql
      * @return String[] first one is selecting count SQL, second one is queryWithoutOrderBySQL, the third one is orderBySQL
-     * @deprecated PagerUtils has better compatible, cancel supportting sortColumn, sortAsc
+     * @deprecated PagerUtils has better compatible, cancel supporting sortColumn, sortAsc
      */
     public static String[] parsePaginationSQLs(String sql) {
 

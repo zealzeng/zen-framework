@@ -2,20 +2,20 @@ package org.zenframework.config;
 
 /**
  * Created by Zeal on 2019/1/12 0012.
+ * @deprecated
  */
 public class ServiceConfigConsts {
 
     //===================================================================
-    public static final String DATASOURCE_URL = "datasource.url";
+    public static final String DATASOURCE_DRUID_URL = "datasource.druid.url";
 
-    public static final String DATASOURCE_USERNAME = "datasource.username";
+    public static final String DATASOURCE_DRUID_USERNAME = "datasource.druid.username";
 
-    public static final String DATASOURCE_PASSWORD = "datasource.password";
+    public static final String DATASOURCE_DRUID_PASSWORD = "datasource.druid.password";
 
-    public static final String DATASOURCE_MAX_ACTIVE = "datasource.max_active";
+    public static final String DATASOURCE_DRUID_MAX_ACTIVE = "datasource.druid.max_active";
 
-    //ms
-    public static final String DATASOURCE_MAX_WAIT = "datasource.max_wait";
+    public static final String DATASOURCE_DRUID_MAX_WAIT = "datasource.druid.max_wait";
 
     //===================================================================
     public static final String CACHE_MANAGER_NAME = "zenCacheManager";

@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Http session utility, suggest always using HttpServletRequest/Response 
  * in spring ctrl but not WebRequest/Response
- * @author Zeal
- * @since 2016年4月28日
+ * @author Zeal 2016年4月28日
  */
 public class SessionUtils {
 	

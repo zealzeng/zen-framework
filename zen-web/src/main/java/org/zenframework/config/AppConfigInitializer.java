@@ -9,6 +9,7 @@ import org.springframework.core.env.PropertySource;
 /**
  * Application configuration initializer
  * Created by Zeal on 2019/1/12 0012.
+ * @deprecated
  */
 public abstract class AppConfigInitializer implements ApplicationContextInitializer {
 

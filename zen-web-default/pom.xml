@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.github.zealzeng</groupId>
+        <artifactId>zen-framework-parent</artifactId>
+        <version>0.0.1-rc1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>zen-web-default</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--        <mybatis-starter.version>2.0.1</mybatis-starter.version>-->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.zealzeng</groupId>
+            <artifactId>zen-web</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

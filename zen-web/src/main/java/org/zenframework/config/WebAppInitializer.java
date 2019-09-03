@@ -11,6 +11,7 @@ import java.util.EnumSet;
 /**
  * We can move most of the web.xml configurations to here, but it's required to support servlet3.0 or above
  * Created by Zeal on 2019/1/12 0012.
+ * @deprecated
  */
 public abstract class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

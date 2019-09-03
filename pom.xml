@@ -2,21 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.7.RELEASE</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-framework-parent</artifactId>
     <version>0.0.1-rc1</version>
-
-    <name>zen framework</name>
+    <name>zen framework parent</name>
     <packaging>pom</packaging>
     <description>zen framework</description>
     <url>https://github.com/zealzeng/zen-framework</url>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
+    <!--    <parent>-->
+    <!--        <groupId>org.sonatype.oss</groupId>-->
+    <!--        <artifactId>oss-parent</artifactId>-->
+    <!--        <version>7</version>-->
+    <!--    </parent>-->
 
     <licenses>
         <license>
@@ -42,11 +47,30 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commons-lang.version>3.9</commons-lang.version>
+        <commons-text.version>1.7</commons-text.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-io.version>2.6</commons-io.version>
+        <fastjson.version>1.2.59</fastjson.version>
+        <bcpkix-jdk15on.version>1.62</bcpkix-jdk15on.version>
+        <!--        <log4j2.version>2.11.1</log4j2.version>-->
+        <!--        <mybatis.version>3.4.6</mybatis.version>-->
+        <!--        <mybatis-spring.version>1.3.2</mybatis-spring.version>-->
+        <druid.version>1.1.12</druid.version>
+        <antisamy.version>1.5.7</antisamy.version>
+        <!--        <servlet-api.version>3.0.1</servlet-api.version>-->
+        <!--        <jsp-api.version>2.3.1</jsp-api.version>-->
+        <!--        <druid-starter.version>1.1.17</druid-starter.version>-->
+        <jsoup.version>1.12.1</jsoup.version>
+        <mybatis-starter.version>2.0.1</mybatis-starter.version>
+        <pagehelper.version>1.2.12</pagehelper.version>
     </properties>
 
     <modules>
         <module>zen-common</module>
         <module>zen-web</module>
+        <module>zen-web-default</module>
+        <module>zen-web-demo</module>
     </modules>
 
     <build>
@@ -68,8 +92,30 @@
                 </includes>
             </resource>
         </resources>
-
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+                                    <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums
+                                        respectively.
+                                    </message>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -110,69 +156,174 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <arguments>-Psonatype-oss-release</arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
-    <!--    <dependencies>-->
-    <!--        <dependency>-->
-    <!--			<groupId>javax.servlet</groupId>-->
-    <!--			<artifactId>javax.servlet-api</artifactId>-->
-    <!--			<version>3.0.1</version>-->
-    <!--			<scope>provided</scope>-->
-    <!--		</dependency>-->
-    <!--		<dependency>-->
-    <!--			<groupId>commons-io</groupId>-->
-    <!--			<artifactId>commons-io</artifactId>-->
-    <!--			<version>2.6</version>-->
-    <!--		</dependency>-->
-    <!--        <dependency>-->
-    <!--			<groupId>org.apache.commons</groupId>-->
-    <!--			<artifactId>commons-lang3</artifactId>-->
-    <!--			<version>3.7</version>-->
-    <!--		</dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.springframework</groupId>-->
-    <!--            <artifactId>spring-webmvc</artifactId>-->
-    <!--            <version>${spring.version}</version>-->
-    <!--            <scope>provided</scope>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--              <groupId>org.apache.logging.log4j</groupId>-->
-    <!--              <artifactId>log4j-api</artifactId>-->
-    <!--              <version>${log4j2.version}</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--              <groupId>org.apache.logging.log4j</groupId>-->
-    <!--              <artifactId>log4j-core</artifactId>-->
-    <!--              <version>${log4j2.version}</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.apache.logging.log4j</groupId>-->
-    <!--            <artifactId>log4j-1.2-api</artifactId>-->
-    <!--            <version>${log4j2.version}</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.apache.logging.log4j</groupId>-->
-    <!--            <artifactId>log4j-jcl</artifactId>-->
-    <!--            <version>${log4j2.version}</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.apache.logging.log4j</groupId>-->
-    <!--            <artifactId>log4j-slf4j-impl</artifactId>-->
-    <!--            <version>${log4j2.version}</version>-->
-    <!--        </dependency>-->
-    <!--    </dependencies>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons-text.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bcpkix-jdk15on.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <version>${antisamy.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>httpclient</artifactId>
+                        <groupId>org.apache.httpcomponents</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>batik-css</artifactId>
+                        <groupId>org.apache.xmlgraphics</groupId>
+                    </exclusion>
+                </exclusions>
+                <scope>provided</scope>
+            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.alibaba</groupId>-->
+            <!--                <artifactId>druid-spring-boot-starter</artifactId>-->
+            <!--                <version>${druid-starter.version}</version>-->
+            <!--            </dependency>-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
 
+        </dependencies>
+    </dependencyManagement>
 
-    <!--<distributionManagement>-->
-    <!--    <snapshotRepository>-->
-    <!--        <id>central-snapshots</id>-->
-    <!--        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-    <!--     </snapshotRepository>-->
-    <!--     <repository>-->
-    <!--        <id>central-stage</id>-->
-    <!--        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-    <!--      </repository>-->
-    <!--</distributionManagement>-->
+    <profiles>
+        <profile>
+            <id>sonatype-oss-release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.1.2</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.7</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <id>sonatype-nexus-snapshots</id>-->
+    <!--            <name>Sonatype Nexus Snapshots</name>-->
+    <!--            <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--            <releases>-->
+    <!--                <enabled>false</enabled>-->
+    <!--            </releases>-->
+    <!--            <snapshots>-->
+    <!--                <enabled>true</enabled>-->
+    <!--            </snapshots>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>central-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>central-stage</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 
 </project>

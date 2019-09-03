@@ -6,119 +6,51 @@
         <groupId>com.github.zealzeng</groupId>
         <artifactId>zen-framework-parent</artifactId>
         <version>0.0.1-rc1</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zen-web</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j2.version>2.11.1</log4j2.version>
-        <spring.version>4.3.21.RELEASE</spring.version>
-        <mybatis.version>3.4.6</mybatis.version>
-        <mybatis-spring.version>1.3.2</mybatis-spring.version>
-        <druid.version>1.1.12</druid.version>
-        <antisamy.version>1.5.7</antisamy.version>
+        <!--        <log4j2.version>2.11.1</log4j2.version>-->
+        <!--        <spring.version>4.3.21.RELEASE</spring.version>-->
+        <!--        <mybatis.version>3.4.6</mybatis.version>-->
+        <!--        <mybatis-spring.version>1.3.2</mybatis-spring.version>-->
+        <!--        <druid.version>1.1.12</druid.version>-->
+        <!--        <antisamy.version>1.5.7</antisamy.version>-->
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.github.zealzeng</groupId>
             <artifactId>zen-common</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-            <scope>provided</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${mybatis-spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-jcl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.4.2.Final</version>
+            <version>${hibernate-validator.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>${javax-validation.version}</version>
         </dependency>
-
         <dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.12.1</version>
+            <version>${jsoup.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.owasp.antisamy</groupId>
             <artifactId>antisamy</artifactId>
@@ -133,6 +65,12 @@
                     <groupId>org.apache.xmlgraphics</groupId>
                 </exclusion>
             </exclusions>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -150,11 +88,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>com.whlylc</groupId>-->
-        <!--            <artifactId>luoying-web</artifactId>-->
-        <!--            <version>0.1.8</version>-->
-        <!--        </dependency>-->
 
     </dependencies>
 

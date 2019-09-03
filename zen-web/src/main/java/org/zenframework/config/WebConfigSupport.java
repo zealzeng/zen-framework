@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * Provide some fault setting for spring mvc
+ * Provide some fault settings for spring mvc
  * @author Zeal 2016年4月27日
  */
 public class WebConfigSupport implements WebMvcConfigurer {
