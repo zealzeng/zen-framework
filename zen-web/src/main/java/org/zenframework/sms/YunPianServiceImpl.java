@@ -3,8 +3,8 @@
  */
 package org.zenframework.sms;
 
-import com.alibaba.fastjson.JSONObject;
 import org.zenframework.util.HttpUtils;
+import org.zenframework.util.JSONObject;
 import org.zenframework.util.JSONUtils;
 import org.zenframework.util.StringUtils;
 import org.zenframework.common.Result;
@@ -57,7 +57,7 @@ public class YunPianServiceImpl implements SMService {
             	logger.debug(httpResult);
             }
             String response = httpResult.getResultEntity();
-            JSONObject map = (JSONObject) JSONUtils.parse(response);
+            JSONObject map = (JSONObject) JSONUtils.parseObject(response);
             Integer code = map.getInteger("code");
             String msg = map.getString("msg");
             

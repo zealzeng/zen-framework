@@ -3,14 +3,14 @@
  */
 package org.zenframework.config;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+//import com.alibaba.fastjson.serializer.SerializerFeature;
+//import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.*;
-import org.springframework.http.converter.xml.SourceHttpMessageConverter;
+//import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -18,8 +18,8 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
-import javax.xml.transform.Source;
-import java.nio.charset.Charset;
+//import javax.xml.transform.Source;
+//import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -58,20 +58,20 @@ public class WebConfigSupport implements WebMvcConfigurer {
 	 * Message converters
 	 */
 	public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
-		//Default converts copied from WebMvcConfigurationSupport.java
-		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-		stringConverter.setWriteAcceptCharset(false);
-		messageConverters.add(new ByteArrayHttpMessageConverter());
-		messageConverters.add(stringConverter);
-		messageConverters.add(new ResourceHttpMessageConverter());
-		messageConverters.add(new SourceHttpMessageConverter<Source>());
-		//messageConverters.add(new AllEncompassingFormHttpMessageConverter());
-		messageConverters.add(new FormHttpMessageConverter());
-		//Only support fast json right now
-		//FastJsonHttpMessageConverter json = new FastJsonHttpMessageConverter();
-		FastJsonHttpMessageConverter fastJsonConverter = new FastJsonHttpMessageConverter();
-		fastJsonConverter.getFastJsonConfig().setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
-		messageConverters.add(fastJsonConverter);
+//		//Default converts copied from WebMvcConfigurationSupport.java
+//		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+//		stringConverter.setWriteAcceptCharset(false);
+//		messageConverters.add(new ByteArrayHttpMessageConverter());
+//		messageConverters.add(stringConverter);
+//		messageConverters.add(new ResourceHttpMessageConverter());
+//		messageConverters.add(new SourceHttpMessageConverter());
+//		//messageConverters.add(new AllEncompassingFormHttpMessageConverter());
+//		messageConverters.add(new FormHttpMessageConverter());
+//		//Only support fast json right now
+//		//FastJsonHttpMessageConverter json = new FastJsonHttpMessageConverter();
+//		FastJsonHttpMessageConverter fastJsonConverter = new FastJsonHttpMessageConverter();
+//		fastJsonConverter.getFastJsonConfig().setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
+//		messageConverters.add(fastJsonConverter);
 	}
 
 	@Override

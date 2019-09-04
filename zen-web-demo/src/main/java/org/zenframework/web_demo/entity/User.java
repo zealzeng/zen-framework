@@ -1,4 +1,4 @@
-package com.sample;
+package org.zenframework.web_demo.entity;
 
 
 public class User {
@@ -9,7 +9,6 @@ public class User {
   private String userPwd;
   private java.sql.Timestamp userCreateTime;
 
-
   public long getUserId() {
     return userId;
   }
@@ -17,7 +16,6 @@ public class User {
   public void setUserId(long userId) {
     this.userId = userId;
   }
-
 
   public String getUserName() {
     return userName;
@@ -27,7 +25,6 @@ public class User {
     this.userName = userName;
   }
 
-
   public String getUserMobile() {
     return userMobile;
   }
@@ -36,7 +33,6 @@ public class User {
     this.userMobile = userMobile;
   }
 
-
   public String getUserPwd() {
     return userPwd;
   }
@@ -44,7 +40,6 @@ public class User {
   public void setUserPwd(String userPwd) {
     this.userPwd = userPwd;
   }
-
 
   public java.sql.Timestamp getUserCreateTime() {
     return userCreateTime;

@@ -1,6 +1,5 @@
 package org.zenframework.shiro.filter;
 
-import com.alibaba.fastjson.JSONObject;
 import org.zenframework.captcha.CaptchaGenerator;
 import org.zenframework.captcha.DefaultCaptchaGenerator;
 import org.zenframework.security.AuthError;
@@ -8,6 +7,7 @@ import org.zenframework.shiro.error.AuthenticationError;
 import org.zenframework.shiro.vo.AuthInfo;
 import org.zenframework.shiro.vo.RememberMeToken;
 import org.zenframework.shiro.vo.WebAuthToken;
+import org.zenframework.util.JSONUtils;
 import org.zenframework.web.util.SessionUtils;
 import org.zenframework.web.util.WebUtils;
 import org.zenframework.web.error.WebError;
@@ -24,6 +24,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Using UserPwdCaptchaToken
@@ -175,14 +177,14 @@ public class WebAuthenticationFilter extends FormAuthenticationFilter {
     }
 
     protected boolean onAjaxLoginFailure(HttpServletRequest req, HttpServletResponse resp, int errorCode) {
-        JSONObject jsonObject = new JSONObject();
+        Map<String,Object> jsonObject = new HashMap<>(4);
         jsonObject.put("resultCode", errorCode);
         jsonObject.put("resultMessage", this.getErrorMessage(errorCode));
         try {
-            resp.getWriter().write(jsonObject.toJSONString());
+            resp.getWriter().write(JSONUtils.toJSONString(jsonObject));
         }
         catch (Exception ex) {
-            log.warn("Failed to write json string " + jsonObject.toJSONString());
+            log.warn("Failed to write json string " + jsonObject, ex);
         }
         return false;
     }

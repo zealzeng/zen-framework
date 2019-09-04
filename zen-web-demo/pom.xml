@@ -2,12 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.github.zealzeng</groupId>
+        <artifactId>zen-dependencies</artifactId>
+        <version>0.0.1-rc1</version>
+        <relativePath>../zen-dependencies/pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-web-demo</artifactId>
-    <version>0.0.1</version>
+    <version>${zen-framework.version}</version>
     <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        <zen-web-default.version>0.0.1-rc1</zen-web-default.version>-->
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.zealzeng</groupId>
+            <artifactId>zen-web-default</artifactId>
+            <version>${zen-framework.version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

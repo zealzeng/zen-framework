@@ -2,17 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>zen-framework-parent</artifactId>
-        <groupId>com.github.zealzeng</groupId>
-        <version>0.0.1-rc1</version>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-common</artifactId>
     <name>zen-common</name>
+    <packaging>jar</packaging>
+    <version>0.0.1-rc1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commons-lang.version>3.9</commons-lang.version>
+        <commons-text.version>1.7</commons-text.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-io.version>2.6</commons-io.version>
+        <!--        <fastjson.version>1.2.59</fastjson.version>-->
+        <bcpkix-jdk15on.version>1.62</bcpkix-jdk15on.version>
+        <!--        <jackson.version>2.9.9</jackson.version>-->
+        <jackson.version>2.9.9</jackson.version>
+        <jackson.version.annotations>2.9.0</jackson.version.annotations>
+        <jackson.version.core>${jackson.version}</jackson.version.core>
+        <jackson.version.databind>${jackson.version}</jackson.version.databind>
     </properties>
 
     <build>
@@ -67,27 +77,50 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba</groupId>-->
+        <!--            <artifactId>fastjson</artifactId>-->
+        <!--            <version>${fastjson.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${bcpkix-jdk15on.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version.annotations}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version.core}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version.databind}</version>
+        </dependency>
+
     </dependencies>
 
 

@@ -3,64 +3,106 @@
  */
 package org.zenframework.util;
 
-import java.util.Map;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Zeal 2016年4月26日
  */
-public class JSONUtils extends JSON {
-	
-    static {
-    	defaultSettings();
-    }
-    
-    /**
-     * Default json settings
-     */
-    public static void defaultSettings() {
-    	JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.DisableCircularReferenceDetect.getMask();
-        //JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.WriteDateUseDateFormat.getMask();
-    }
-	
-	/**
-	 * Covert bean to json string by class property filter 
-	 * @param bean
-	 * @param filterClass the bean class or bean's property class
-	 * @return
-	 */
-	public static String toJSONString(Object bean, Class<?> filterClass, String...includedProperties) {
-		SimplePropertyPreFilter filter = new SimplePropertyPreFilter(filterClass, includedProperties);
-		return JSON.toJSONString(bean, filter, new SerializerFeature[0]);
+public class JSONUtils {
+
+	protected static ObjectMapper objectMapper = new ObjectMapper();
+
+	static {
+		// 如果存在未知属性，则忽略不报错
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // 允许key没有双引号
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        // 允许key有单引号
+        objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        // 允许整数以0开头
+        objectMapper.configure(JsonParser.Feature.ALLOW_NUMERIC_LEADING_ZEROS, true);
+        // 允许字符串中存在回车换行控制符
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
 	}
-	
-	/**
-	 * Covert bean to json string by mulitple classes include/exclude property filter
-	 * @param bean
-	 * @param classIncludeProps
-	 * @param classExcludeProps
-	 * @return
-	 */
-	public static String toJSONString(Object bean, Map<Class<?>, String[]> classIncludeProps, Map<Class<?>, String[]> classExcludeProps) {
-		ComplexPropertyPreFilter filter = new ComplexPropertyPreFilter();
-		if (classIncludeProps != null && classIncludeProps.size() > 0) {
-			filter.setIncludes(classIncludeProps);
+
+	public static String toJSONString(Object value) {
+		try {
+			return objectMapper.writeValueAsString(value);
 		}
-		if (classExcludeProps != null && classExcludeProps.size() > 0) {
-			filter.setExcludes(classExcludeProps);
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to call toJSONString, " + e.toString(), e);
 		}
-		return JSON.toJSONString(bean, filter, new SerializerFeature[0]);
 	}
-	
-    public static void main(String[] args) throws Exception {
-    	String str = "{'replace':function(){alert(/xss/);}}";
-    	JSONObject map = new JSONObject();
-    	map.put("info", str);
-    	System.out.println(JSONUtils.toJSONString(map));
-    }
+
+	public static <T>T parseObject(String text, Class<T> clazz) {
+		try {
+			return objectMapper.readValue(text, clazz);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to parseObject, " + e.toString(), e);
+		}
+	}
+
+	public static JSONObject parseObject(String text) {
+		try {
+			Map<String,Object> map = objectMapper.readValue(text, Map.class);
+			return new JSONObject(map);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to parseObject, " + e.toString(), e);
+		}
+
+	}
+
+	public static<T>List<T>  parseArray(String text, Class<T> clazz) {
+		JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, clazz);
+		try {
+			return objectMapper.readValue(text, javaType);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to parseArray, " + e.toString(), e);
+		}
+	}
+
+	public static JSONArray parseArray(String text) {
+		try {
+			List<Object> list = objectMapper.readValue(text, List.class);
+			return new JSONArray(list);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to parseArray, " + e.toString(), e);
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		String value = "{a:1, b:[{b1:1},{b2:2},{b3:3}],c:5}";
+		Map<String,Object> map = parseObject(value, Map.class);
+		System.out.println(((List)map.get("b")).get(0).getClass());
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("a1", 1);
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		jsonObject.put("a2", list);
+		System.out.println(JSONUtils.toJSONString(jsonObject));
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.add("z1");
+		jsonArray.add(list);
+		System.out.println(JSONUtils.toJSONString(jsonArray));
+	}
 
 }
