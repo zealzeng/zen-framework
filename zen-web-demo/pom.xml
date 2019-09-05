@@ -13,12 +13,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-web-demo</artifactId>
-    <version>${zen-framework.version}</version>
+    <version>0.0.1-rc1</version>
     <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--        <zen-web-default.version>0.0.1-rc1</zen-web-default.version>-->
     </properties>
 
 
@@ -26,7 +25,12 @@
         <dependency>
             <groupId>com.github.zealzeng</groupId>
             <artifactId>zen-web-default</artifactId>
-            <version>${zen-framework.version}</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
     </dependencies>
 
