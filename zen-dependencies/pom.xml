@@ -12,9 +12,8 @@
 
     <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-dependencies</artifactId>
-    <version>${zen-framework.version}</version>
+    <version>0.0.1-rc1</version>
     <packaging>pom</packaging>
-
 
 
     <description>zen framework dependencies</description>
@@ -50,7 +49,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <zen-framework.version>0.0.1-rc1</zen-framework.version>
+<!--        <zen-framework.version>0.0.1-rc1</zen-framework.version>-->
         <commons-lang.version>3.9</commons-lang.version>
         <commons-text.version>1.7</commons-text.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
@@ -132,20 +131,20 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-gpg-plugin</artifactId>-->
+<!--                <version>1.6</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>sign-artifacts</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>sign</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>
@@ -291,19 +290,6 @@
         </profile>
     </profiles>
 
-    <!--    <repositories>-->
-    <!--        <repository>-->
-    <!--            <id>sonatype-nexus-snapshots</id>-->
-    <!--            <name>Sonatype Nexus Snapshots</name>-->
-    <!--            <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-    <!--            <releases>-->
-    <!--                <enabled>false</enabled>-->
-    <!--            </releases>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>true</enabled>-->
-    <!--            </snapshots>-->
-    <!--        </repository>-->
-    <!--    </repositories>-->
 
     <distributionManagement>
         <snapshotRepository>
