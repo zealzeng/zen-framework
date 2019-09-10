@@ -12,7 +12,7 @@
 
     <groupId>com.github.zealzeng</groupId>
     <artifactId>zen-dependencies</artifactId>
-    <version>0.0.1-rc1</version>
+    <version>0.0.1-rc2</version>
     <packaging>pom</packaging>
 
 
@@ -54,7 +54,7 @@
         <commons-text.version>1.7</commons-text.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
-        <fastjson.version>1.2.59</fastjson.version>
+        <fastjson.version>1.2.60</fastjson.version>
         <bcpkix-jdk15on.version>1.62</bcpkix-jdk15on.version>
         <druid.version>1.1.12</druid.version>
         <antisamy.version>1.5.7</antisamy.version>
@@ -64,24 +64,24 @@
     </properties>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                    <include>**/*.font</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                    <include>**/*.font</include>
-                </includes>
-            </resource>
-        </resources>
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>${basedir}/src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                    <include>**/*.properties</include>-->
+<!--                    <include>**/*.font</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--            <resource>-->
+<!--                <directory>${basedir}/src/main/resources</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                    <include>**/*.properties</include>-->
+<!--                    <include>**/*.font</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--        </resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
