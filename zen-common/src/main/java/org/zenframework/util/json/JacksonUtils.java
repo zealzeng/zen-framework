@@ -1,21 +1,21 @@
 /*
  * Copyright (c) 2016, All rights reserved.
  */
-package org.zenframework.util;
+package org.zenframework.util.json;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Zeal 2016年4月26日
  */
-public class JSONUtils {
+public class JacksonUtils {
 
 	protected static ObjectMapper objectMapper = new ObjectMapper();
 
@@ -30,6 +30,7 @@ public class JSONUtils {
         objectMapper.configure(JsonParser.Feature.ALLOW_NUMERIC_LEADING_ZEROS, true);
         // 允许字符串中存在回车换行控制符
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+
 	}
 
 	public static String toJSONString(Object value) {
@@ -41,6 +42,18 @@ public class JSONUtils {
 			throw new RuntimeException("Failed to call toJSONString, " + e.toString(), e);
 		}
 	}
+
+//	public static String toJSONString(Object value, String... includeFields) {
+//		SimpleFilterProvider provider = new SimpleFilterProvider();
+//		provider.addFilter(value.getClass().getName(), SimpleBeanPropertyFilter.filterOutAllExcept(includeFields));
+//		try {
+//			return objectMapper.writer(provider).writeValueAsString(value);
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("Failed to call toJSONString, " + e.toString(), e);
+//		}
+//	}
 
 	public static <T>T parseObject(String text, Class<T> clazz) {
 		try {
@@ -62,6 +75,16 @@ public class JSONUtils {
 			throw new RuntimeException("Failed to parseObject, " + e.toString(), e);
 		}
 
+	}
+
+	public static JsonNode parseNode(String text) {
+		try {
+			return objectMapper.readTree(text);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to parseNode, " + e.toString(), e);
+		}
 	}
 
 	public static<T>List<T>  parseArray(String text, Class<T> clazz) {
@@ -88,21 +111,27 @@ public class JSONUtils {
 
 	public static void main(String[] args) throws Exception {
 		String value = "{a:1, b:[{b1:1},{b2:2},{b3:3}],c:5}";
-		Map<String,Object> map = parseObject(value, Map.class);
-		System.out.println(((List)map.get("b")).get(0).getClass());
 
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("a1", 1);
-		List<String> list = new ArrayList<>();
-		list.add("a");
-		list.add("b");
-		list.add("c");
-		jsonObject.put("a2", list);
-		System.out.println(JSONUtils.toJSONString(jsonObject));
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add("z1");
-		jsonArray.add(list);
-		System.out.println(JSONUtils.toJSONString(jsonArray));
+		JsonNode node = parseNode(value);
+		JsonNode b = node.get("b");
+		JsonNode b1Node = b.get(1);
+		System.out.println(b1Node.get("b2").asText());
+
+//		Map<String,Object> map = parseObject(value, Map.class);
+//		System.out.println(((List)map.get("b")).get(0).getClass());
+//
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("a1", 1);
+//		List<String> list = new ArrayList<>();
+//		list.add("a");
+//		list.add("b");
+//		list.add("c");
+//		jsonObject.put("a2", list);
+//		System.out.println(JSONUtils.toJSONString(jsonObject));
+//		JSONArray jsonArray = new JSONArray();
+//		jsonArray.add("z1");
+//		jsonArray.add(list);
+//		System.out.println(JSONUtils.toJSONString(jsonArray));
 	}
 
 }

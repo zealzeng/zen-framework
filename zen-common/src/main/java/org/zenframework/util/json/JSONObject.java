@@ -1,4 +1,6 @@
-package org.zenframework.util;
+package org.zenframework.util.json;
+
+import org.zenframework.util.TypeUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -204,7 +206,7 @@ public class JSONObject implements Map<String,Object> {
             return new JSONObject(valueMap);
         }
         else if (value instanceof String) {
-            return JSONUtils.parseObject((String) value);
+            return JacksonUtils.parseObject((String) value);
         }
         else if (value instanceof List) {
             throw new RuntimeException("Not JSONObject, call getJSONArray instead");

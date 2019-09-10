@@ -8,7 +8,7 @@
     <artifactId>zen-common</artifactId>
     <name>zen-common</name>
     <packaging>jar</packaging>
-    <version>0.0.1-rc1</version>
+    <version>0.0.1-rc2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,7 +16,7 @@
         <commons-text.version>1.7</commons-text.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
-        <!--        <fastjson.version>1.2.59</fastjson.version>-->
+        <fastjson.version>1.2.59</fastjson.version>
         <bcpkix-jdk15on.version>1.62</bcpkix-jdk15on.version>
         <!--        <jackson.version>2.9.9</jackson.version>-->
         <jackson.version>2.9.9</jackson.version>
@@ -94,11 +94,11 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba</groupId>-->
-        <!--            <artifactId>fastjson</artifactId>-->
-        <!--            <version>${fastjson.version}</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>

@@ -1,4 +1,4 @@
-package org.zenframework.util;
+package org.zenframework.util.json;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
