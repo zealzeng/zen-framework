@@ -53,7 +53,7 @@
         <commons-lang.version>3.9</commons-lang.version>
         <commons-text.version>1.7</commons-text.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <fastjson.version>1.2.60</fastjson.version>
         <bcpkix-jdk15on.version>1.62</bcpkix-jdk15on.version>
         <druid.version>1.1.12</druid.version>
